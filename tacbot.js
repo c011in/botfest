@@ -11,10 +11,10 @@ var RTM_EVENTS = require('@slack/client').RTM_EVENTS;
 var MemoryDataStore = require('@slack/client').MemoryDataStore;
 var CLIENT_EVENTS = require('@slack/client').CLIENT_EVENTS;
 
-var token = process.env.SLACK_API_TOKEN || 'xoxb-198991807682-A3prDEp9ZqaoxmBnFmIjoeFJ'; //Your token here!
+var token = process.env.SLACK_API_TOKEN || 'xoxb-198991807682-xfqSCXSiURUorrQ7ucfYuIGh'; //Your token here!
 
 var rtm = new RtmClient(token, { 
-  logLevel: 'release',
+  logLevel: 'debug',
   // Initialise a data store for our client, this will load additional helper functions for the storing and retrieval of data
   dataStore: new MemoryDataStore()
  });
@@ -26,7 +26,7 @@ let channel;
 
 rtm.on(CLIENT_EVENTS.RTM.AUTHENTICATED, (rtmStartData) => {
   for (const c of rtmStartData.channels) {
-	  if (c.is_member && c.name ==='bots-funhouse') { channel = c.id }
+	  if (c.is_member && c.name ==='bot-funhouse') { channel = c.id }
   }
   console.log(`Logged in as ${rtmStartData.self.name} of team ${rtmStartData.team.name}, but not yet connected to a channel`);
 });

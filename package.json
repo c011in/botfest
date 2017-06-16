@@ -10,5 +10,14 @@
   "license": "ISC",
   "dependencies": {
     "@slack/client": "^3.10.0"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/c011in/botfest.git"
+  },
+  "bugs": {
+    "url": "https://github.com/c011in/botfest/issues"
+  },
+  "homepage": "https://github.com/c011in/botfest#readme"
 }
