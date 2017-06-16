@@ -11,7 +11,7 @@ var RTM_EVENTS = require('@slack/client').RTM_EVENTS;
 var MemoryDataStore = require('@slack/client').MemoryDataStore;
 var CLIENT_EVENTS = require('@slack/client').CLIENT_EVENTS;
 
-var token = process.env.SLACK_API_TOKEN || 'xoxb-198991807682-xfqSCXSiURUorrQ7ucfYuIGh'; //Your token here!
+var token = process.env.SLACK_API_TOKEN || 'xoxb-198991807682-ZClPcdEWxyeD5Fq1316KzriW'; //Your token here!
 
 var rtm = new RtmClient(token, { 
   logLevel: 'debug',
@@ -36,14 +36,29 @@ rtm.on(RTM_EVENTS.MESSAGE, function handleRtmMessage(message) {
   if(message.text.indexOf(rtm.activeUserId) > -1) //We've been tagged in a message.
   {
     if(message.text.toLowerCase().indexOf("hello") > -1)
+    {
       rtm.sendMessage("Hello, " + rtm.dataStore.getUserById(message.user).real_name, message.channel);
+    }
+    if(message.text.toLowerCase().indexOf("info") > -1) // User requested info.  Give them the team name.
+    {
+      web.team.info(function teamInfoCallback(err, info) // Get team name using web API.
+      {
+        if(err) 
+        {
+          console.log('Error getting team info from webAPI:', err);
+        }
+        else
+        {
+          rtm.sendMessage("Team info: " + info.team.name, message.channel);
+        }
+      });
+    }
+
   }
 });
 
 rtm.on(RTM_EVENTS.REACTION_ADDED, function handleRtmReactionAdded(reaction) {
   console.log('Reaction added:', reaction);
-  
-
 });
 
 rtm.on(RTM_EVENTS.TEAM_JOIN, function handleRtmTeamJoin(member) {
