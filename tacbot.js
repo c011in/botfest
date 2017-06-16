@@ -11,7 +11,7 @@ var RTM_EVENTS = require('@slack/client').RTM_EVENTS;
 var MemoryDataStore = require('@slack/client').MemoryDataStore;
 var CLIENT_EVENTS = require('@slack/client').CLIENT_EVENTS;
 
-var token = process.env.SLACK_API_TOKEN || 'xoxb-198991807682-ZClPcdEWxyeD5Fq1316KzriW'; //Your token here!
+var token = process.env.SLACK_API_TOKEN || 'xoxb-198991807682-T7nzlYPduJpd0ufoXtbSTVqD'; //Your token here!
 
 var rtm = new RtmClient(token, { 
   logLevel: 'debug',
@@ -63,7 +63,7 @@ rtm.on(RTM_EVENTS.REACTION_ADDED, function handleRtmReactionAdded(reaction) {
 
 rtm.on(RTM_EVENTS.TEAM_JOIN, function handleRtmTeamJoin(member) {
   console.log('Member joined the team:', member);
-  rtm.sendMessage("Welcome, " + member.user_profile.real_name, channel);
+  rtm.sendMessage("Welcome, " + member.user.profile.real_name, channel);
 });
 
 
