@@ -1,0 +1,14 @@
+{
+  "name": "slackbottest",
+  "version": "1.0.0",
+  "description": "Prototype Slackbot",
+  "main": "index.js",
+  "scripts": {
+    "test": "slackbot-test"
+  },
+  "author": "Collin Myers",
+  "license": "ISC",
+  "dependencies": {
+    "@slack/client": "^3.10.0"
+  }
+}
