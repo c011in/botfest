@@ -1,17 +1,17 @@
 import os
 import time
+import upload
 from slackclient import SlackClient
 
 
 # starterbot's ID as an environment variable
-BOT_ID = os.environ.get("BOT_ID")
-
+BOT_ID = ''
 # constants
 AT_BOT = "<@" + BOT_ID + ">"
 EXAMPLE_COMMAND = "do"
 
-# instantiate Slack & Twilio clients
-slack_client = SlackClient(os.environ.get('SLACK_BOT_TOKEN'))
+# instantiate Slack
+slack_client = SlackClient("")
 
 
 def handle_command(command, channel):
@@ -20,12 +20,12 @@ def handle_command(command, channel):
         are valid commands. If so, then acts on the commands. If not,
         returns back what it needs for clarification.
     """
-    response = "Not sure what you mean. Use the *" + EXAMPLE_COMMAND + \
-               "* command with numbers, delimited by spaces."
-    if command.startswith(EXAMPLE_COMMAND):
-        response = "Sure...write some more code then I can do that!"
-    slack_client.api_call("chat.postMessage", channel=channel,
-                          text=response, as_user=True)
+    c = command.split(" ")
+    if len(c) is 3 and c[0] == 'emoji':
+        name = upload.download_file(c[2])
+        upload.upload_emoji(upload.session(), c[1], name)
+        slack_client.api_call("chat.postMessage", channel=channel,
+                            text="Added", as_user=True)
 
 
 def parse_slack_output(slack_rtm_output):
