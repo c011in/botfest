@@ -7,3 +7,7 @@ Setup:
 3. Accept invitation to BotFest2017 Slack group.
 4. Create your own NodeJS bot file using the given bot token.
 5. Run your bot with `node yourBotFile.js`
+
+Useful references:
+List of subscribable events using RTM: https://api.slack.com/events
+Web API reference: https://api.slack.com/web
